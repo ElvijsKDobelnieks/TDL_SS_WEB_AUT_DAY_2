@@ -18,7 +18,7 @@ class buttonsPage extends BasePage {
         return cy.get("#rightClickMessage")
     }
     static get clickMeButton() {
-        return cy.get("#mEzIr");
+        return cy.get(".mt-4:nth-child(3)>button");
     }
     static get clickMeButtonMessage() {
         return cy.get("#dynamicClickMessage");
