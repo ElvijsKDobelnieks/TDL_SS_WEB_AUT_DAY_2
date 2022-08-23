@@ -1,20 +1,47 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
+import checkBoxPage from "../../pageObjects/checkBoxPage";
 
-context("Elements Page", () => {
+describe("Elements Page", () => {
   context("Text box scenarios", () => {
     beforeEach(() => {
       TextBoxPage.visit();
-    });
-
+    })
     // Create texbox scenario
     // fill in textboxes with necessary information
     // validate the paragraphs
+
     it("Filling in Text Boxes", () => {
       // add the necessary steps
-    });
+      TextBoxPage.fullName.type('Elvijs Kaspars Dobelnieks');
+      TextBoxPage.email.type('test@test.lv');
+      TextBoxPage.currentAddress.type('Address');
+      TextBoxPage.permanentAddress.type('New Address');
+      TextBoxPage.submitButton.click();
+      TextBoxPage.fullNameFilled.should('contain', 'Elvijs Kaspars Dobelnieks');
+      TextBoxPage.emailFilled.should('contain', 'test@test.lv');
+      TextBoxPage.currentAddressFilled.should('contain', 'Address');
+      TextBoxPage.permanentAddressFilled.should('contain', 'New Address');
+      // TextBoxPage.paragraph.should('have.length', 4);
+    })
   });
 
   context("Check box scenarios", () => {
+    beforeEach(() => {
+      checkBoxPage.visit();
+    })
+     it("Check box scenario 1", () => {
+      checkBoxPage.expandButton.click();
+      checkBoxPage.react.click({force: true});
+      checkBoxPage.angular.click({force: true});
+      checkBoxPage.general.click({force: true});
+      checkBoxPage.excel.click({force: true});
+      checkBoxPage.clicked.should('contain.text', 'react');
+      checkBoxPage.clicked.should('contain.text', 'angular');
+      checkBoxPage.clicked.should('contain.text', 'general');
+      checkBoxPage.clicked.should('contain.text', 'excelFile');
+     })
+  });
+    
     // Create CheckBoxPage page object
     // Create checkbox scenario 1:
     // Click the "+"/expand button
@@ -25,9 +52,10 @@ context("Elements Page", () => {
     // Click expand button
     // Click Office
     // Validate the checked checkboxes
-  });
+  // });
 
   context("Radio button scenarios", () => {
+    // 
     // Create RadioButtons page object
     // Scenario 1:
     // Click yesButton
@@ -62,4 +90,5 @@ context("Elements Page", () => {
     // Do dynamic click
     // Validate dynamic click message
   });
+
 });
