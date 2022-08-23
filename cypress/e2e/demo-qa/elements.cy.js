@@ -1,5 +1,8 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
 import checkBoxPage from "../../pageObjects/checkBoxPage";
+import radioButtonPage from "../../pageObjects/radioButtonPage";
+import webTablesPage from "../../pageObjects/webTablesPage";
+import buttonsPage from "../../pageObjects/buttonsPage";
 
 describe("Elements Page", () => {
   context("Text box scenarios", () => {
@@ -40,8 +43,16 @@ describe("Elements Page", () => {
       checkBoxPage.clicked.should('contain.text', 'general');
       checkBoxPage.clicked.should('contain.text', 'excelFile');
      })
+     it("Check box scenario 2", () => {
+      checkBoxPage.expandButton.click();
+      checkBoxPage.office.click({force: true});
+      checkBoxPage.officeCliked.should('contain.text', 'office');
+      checkBoxPage.officeCliked.should('contain.text', 'public');
+      checkBoxPage.officeCliked.should('contain.text', 'private');
+      checkBoxPage.officeCliked.should('contain.text', 'classified');
+      checkBoxPage.officeCliked.should('contain.text', 'general');
+     })
   });
-    
     // Create CheckBoxPage page object
     // Create checkbox scenario 1:
     // Click the "+"/expand button
@@ -55,7 +66,16 @@ describe("Elements Page", () => {
   // });
 
   context("Radio button scenarios", () => {
-    // 
+    beforeEach(() => {
+      radioButtonPage.visit();
+    })
+    it("Scenario 1", () => {
+      radioButtonPage.yesButton.click({force: true});
+      radioButtonPage.yesClicked.should('contain.text', 'Yes');
+      radioButtonPage.impressiveButton.click({force: true});
+      radioButtonPage.impressiveClicked.should('contain.text', 'Impressive');
+      radioButtonPage.noButton.should('be.disabled');
+    })
     // Create RadioButtons page object
     // Scenario 1:
     // Click yesButton
@@ -66,6 +86,35 @@ describe("Elements Page", () => {
   });
 
   context("Web tables scenarios", () => {
+    beforeEach(() => {
+      webTablesPage.visit();
+    })
+    it("Scenario 1", () => {
+      webTablesPage.addButton.click();
+      webTablesPage.firstName.type('Elvijs Kaspars');
+      webTablesPage.lastName.type('Dobelnieks');
+      webTablesPage.email.type('test@test.lv');
+      webTablesPage.age.type('27');
+      webTablesPage.salary.type('100000');
+      webTablesPage.department.type('crypto');
+      webTablesPage.submitButton.click();
+      webTablesPage.searchField.type('Elvijs');
+      webTablesPage.table.should('contain', 
+      'Elvijs Kaspars', 
+      'Dobelnieks',
+      'test@test.lv',
+      '27',
+      '100000',
+      'crypto');
+    })
+    it("Scenario 2", () => {
+      webTablesPage.searchField.clear()
+      webTablesPage.deleteRecord1.click();
+      webTablesPage.deleteRecord2.click();
+      webTablesPage.deleteRecord3.click();
+      // webTablesPage.deleteRecord4.click();
+      webTablesPage.emptyTable.should('contain.text', 'No rows found');
+    })
     // Create WebTables page object
     // Create scenario 1:
     // Click add record button
@@ -73,13 +122,25 @@ describe("Elements Page", () => {
     // click submit button
     // search for the user based on previously added information
     // validate tha the user is visible
-
+  
     // Create Scenario 2:
     // Delete all table rows
     // Validate that we see text - No rows found
   });
 
   context("Buttons scenarios", () => {
+    beforeEach(() => {
+      buttonsPage.visit();
+    })
+    it("Buttons clicking scenario", () => {
+      buttonsPage.doubleClickButton.dblclick();
+      buttonsPage.doubleClickMessage.should('contain', 'You have done a double click');
+      buttonsPage.rightClickButton.rightclick();
+      buttonsPage.rightClickMessage.should('contain', 'You have done a right click');
+      buttonsPage.clickMeButton.click();
+      buttonsPage.clickMeButtonMessage.should('contain', 'You have done a dynamic click');
+    })
+    
     // Create buttons clicking scenario
     // Create Buttons page
     // Check documentation https://docs.cypress.io/api/commands/and for how to perform different types of clicking
