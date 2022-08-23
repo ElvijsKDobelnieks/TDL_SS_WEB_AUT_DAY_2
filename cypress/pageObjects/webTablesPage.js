@@ -32,17 +32,27 @@ class webTablesPage extends BasePage {
     static get table() {
         return cy.get(".rt-table");
     }
-    static get deleteRecord1() {
-        return cy.get("#delete-record-1");
+    // static get deleteRecord1() {
+    //     return cy.get("#delete-record-1");
+    // }
+    // static get deleteRecord2() {
+    //     return cy.get("#delete-record-2");
+    // }
+    // static get deleteRecord3() {
+    //     return cy.get("#delete-record-3");
+    // }
+    // static get deleteRecord4() {
+    //     return cy.get("#delete-record-4");
+    // }
+    static getrow(itemName) {
+        return this.rows.contains(itemName).parent();
     }
-    static get deleteRecord2() {
-        return cy.get("#delete-record-2");
-    }
-    static get deleteRecord3() {
-        return cy.get("#delete-record-3");
-    }
-    static get deleteRecord4() {
-        return cy.get("#delete-record-4");
+    static deleteUser(userName) {
+        return this.rows
+            .contains(userName)
+            .parent()
+            .find("[title='Delete']")
+            .click();
     }
     static get searchField() {
         return cy.get("#searchBox");

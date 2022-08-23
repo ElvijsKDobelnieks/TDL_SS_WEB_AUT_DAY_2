@@ -108,10 +108,13 @@ describe("Elements Page", () => {
       'crypto');
     })
     it("Scenario 2", () => {
-      webTablesPage.searchField.clear()
-      webTablesPage.deleteRecord1.click();
-      webTablesPage.deleteRecord2.click();
-      webTablesPage.deleteRecord3.click();
+      // webTablesPage.searchField.clear()
+      ['Cierra', 'Alden', 'Kierra', 'Elvijs Kaspars'].forEach((name) => {
+        webTablesPage.deleteUser(name);
+      });
+      // webTablesPage.deleteRecord1.click();
+      // webTablesPage.deleteRecord2.click();
+      // webTablesPage.deleteRecord3.click();
       // webTablesPage.deleteRecord4.click();
       webTablesPage.emptyTable.should('contain.text', 'No rows found');
     })
