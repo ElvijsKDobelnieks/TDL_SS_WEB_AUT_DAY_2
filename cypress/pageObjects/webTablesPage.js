@@ -48,7 +48,7 @@ class webTablesPage extends BasePage {
         return this.rows.contains(itemName).parent();
     }
     static deleteUser(name) {
-        return this.rows.contains(name).parent().find("[title='Delete']").click();
+        return this.rows.contains(`${name}`).parent().find("[title='Delete']").click();
     }
     static get searchField() {
         return cy.get("#searchBox");
